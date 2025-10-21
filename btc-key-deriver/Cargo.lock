@@ -115,7 +115,7 @@ dependencies = [
 
 [[package]]
 name = "btc-key-deriver"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "bip39",
  "bitcoin",
