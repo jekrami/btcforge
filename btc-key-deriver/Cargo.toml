@@ -16,3 +16,4 @@ zeroize = { version = "1.5", features = ["zeroize_derive"] }
 clap = { version = "4.0", features = ["derive"] }
 secp256k1 = { version = "0.27.0", features = ["global-context", "rand-std"] }
 hex = "0.4"
+rayon = "1.11.0"
