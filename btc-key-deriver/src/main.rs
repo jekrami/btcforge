@@ -19,17 +19,13 @@ struct Args {
     #[clap(short, long, value_parser)]
     input: PathBuf,
 
-    /// Output file for addresses only (mandatory). Default: addressonly.txt
+    /// Output file for addresses only. Default: addressonly.txt
     #[clap(short, long, value_parser, default_value = "addressonly.txt")]
-    addresses: PathBuf,
+    output: PathBuf,
 
-    /// Output file for the derived keys and addresses in CSV format (optional).
-    #[clap(short, long, value_parser)]
-    output: Option<PathBuf>,
-
-    /// Generate full output file with all details (keys, addresses, paths).
-    #[clap(short = 'f', long)]
-    full: bool,
+    /// Generate full output file with all details (keys, addresses, paths) in a specified location (optional).
+    #[clap(short = 'f', long, value_parser)]
+    full: Option<PathBuf>,
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -183,14 +179,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     // Write addresses-only to file (mandatory)
-    std::fs::write(&args.addresses, &addresses_content)?;
-    println!("Successfully wrote addresses to {}", args.addresses.display());
+    std::fs::write(&args.output, &addresses_content)?;
+    println!("Successfully wrote addresses to {}", args.output.display());
 
     // Write full output to file if requested
-    if args.full || args.output.is_some() {
-        let output_path = args.output.as_ref().unwrap_or(&args.addresses);
-        std::fs::write(output_path, &output_content)?;
-        println!("Successfully wrote derived keys to {}", output_path.display());
+    if let Some(full_path) = &args.full {
+        std::fs::write(full_path, &output_content)?;
+        println!("Successfully wrote derived keys to {}", full_path.display());
     }
 
     Ok(())
