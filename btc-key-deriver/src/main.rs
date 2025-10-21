@@ -105,7 +105,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 "P2SH" => Address::p2shwpkh(&public_key, Network::Bitcoin)?,
                 "P2WPKH" => Address::p2wpkh(&public_key, Network::Bitcoin)?,
                 "P2WSH" => {
-                    let script = ScriptBuf::new_v0_p2wpkh(&public_key.wpubkey_hash().unwrap());
+                    let script = ScriptBuf::new_p2pk(&public_key);
                     Address::p2wsh(&script, Network::Bitcoin)
                 }
                 "P2TR" => {
