@@ -5,12 +5,12 @@ This is a command-line tool written in Rust that derives Bitcoin keys and addres
 ## Features
 
 *   Reads 12-word BIP-39 seed phrases from a text file (one per line).
-*   Derives keys and addresses for the following derivation paths:
-    *   **P2PKH (Legacy):** `m/44'/0'/0'/0/0`
-    *   **P2SH (Nested SegWit):** `m/49'/0'/0'/0/0`
-    *   **P2WPKH (Bech32):** `m/84'/0'/0'/0/0`
-    *   **P2WSH (Native SegWit Script-Hash):** `m/87'/0'/0'/0/0`
-    *   **P2TR (Taproot, Bech32m):** `m/86'/0'/0'/0/0`
+*   Derives 10 keys and addresses for each of the following derivation paths:
+    *   **P2PKH (Legacy):** `m/44'/0'/0'/0/0` to `m/44'/0'/0'/0/9`
+    *   **P2SH (Nested SegWit):** `m/49'/0'/0'/0/0` to `m/49'/0'/0'/0/9`
+    *   **P2WPKH (Bech32):** `m/84'/0'/0'/0/0` to `m/84'/0'/0'/0/9`
+    *   **P2WSH (Native SegWit Script-Hash):** `m/87'/0'/0'/0/0` to `m/87'/0'/0'/0/9`
+    *   **P2TR (Taproot, Bech32m):** `m/86'/0'/0'/0/0` to `m/86'/0'/0'/0/9`
 *   Outputs a CSV file containing the derived keys and addresses.
 *   Uses the `zeroize` crate to securely wipe private keys from memory after use.
 
@@ -58,7 +58,7 @@ The output CSV file will have the following columns:
 *   `seed_index`: The 1-based index of the seed phrase in the input file.
 *   `seed`: The 12-word BIP-39 seed phrase.
 *   `derivation_path`: The derivation path used to derive the keys.
-*   `address_index`: The address index (always 0 in this version).
+*   `address_index`: The address index (0-9).
 *   `address`: The derived Bitcoin address.
 *   `public_key`: The compressed public key in hex format.
 *   `private_key`: The private key in hex format.
